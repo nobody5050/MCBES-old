@@ -3,4 +3,4 @@ python:
   - "3.4"
 install:
   - "pip install requests"
-script: python raklibtest.py
+script: python /src/raklibtest.py
