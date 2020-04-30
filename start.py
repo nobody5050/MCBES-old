@@ -5,7 +5,7 @@ from shutil import copyfile
 if not os.path.isfile('config.py'):
     os.chdir('Core/AlphaMc/wizard')
     os.system('python installer.py')
-print "AlphaMc is starting! Please wait! Version 1 beta!"
+print "MCBES proxy is starting! Please wait! Version 1 beta!"
  
 HOST = '0.0.0.0'
 PORT = 19132
