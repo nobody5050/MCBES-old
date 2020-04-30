@@ -4,4 +4,4 @@ python:
 install:
   - "pip install requests"
 script: python src/libs/raklibtest.py
-script: python src/start.py
+script: python start.py
