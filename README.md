@@ -7,7 +7,7 @@ Project forked. Changed the name so i should be fine.
 ### MCBES is a powerful fast minecraft proxy server. built for minecraft pocket 0.6.1 and minecraft Pi edition 1.1.0
 
 ## Why python?
-Python is fast, easy to write, easy for fix bugs.
+Python is fast, easy to write, easy for fix bugs. Note, Runs Python 3.4. no requirements.txt as of yet
 
 ## Release date?
 NA yet. I may never release, we shall see
