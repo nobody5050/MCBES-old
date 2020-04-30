@@ -1,16 +1,20 @@
-# AlphaMC
-#### written by daniktheboss
+# MCBES
+#### written by daniktheboss, Forked by nobody5050/6502
 
-PROJECT STOPPED!! IF SOMEONE WANTS TO FORK. GO AHEAD.
-My rules for forking.
+Project forked. Changed the name so i should be fine. 
+**Disclaimer: I will not make a minecraft server software, there are too many already. This is a proxy.**
 
-1. DO NOT USE MY SOFTWARE NAME. 
-2. Done
-
-AlphaMC is a fast Minecraft: Pocket Edition server software.
+### MCBES is a powerful fast minecraft proxy server. built for minecraft pocket 0.6.1 and minecraft Pi edition 1.1.0
 
 ## Why python?
-Python is fast, easy to write, easy for fix bugs. We might make a GUI using Tkinter, but that is yet to be determined.
+Python is fast, easy to write, easy for fix bugs.
 
 ## Release date?
-NA yet. check the repo for info!
+NA yet. I may never release, we shall see
+
+## Why 0.6.1?
+I anticipate being asked this a lot if I make it work so I might as well answer now. Basically this is a proxy that translates
+packets send by minecraft pi edition over to ppackets by new bedrock edition servers, the goal being the ability to join
+minecraft bedrock servers on on your pi. **This may constitute piracy as I am enabling you to play minecraft bedrock worlds
+for free however I claim no responsibility to what you do with this software. please have a valid version of minecraft bedrock
+when playing this**
