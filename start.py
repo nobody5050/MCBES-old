@@ -1,4 +1,4 @@
-from src.libs.pyraklib.server import PyRakLibServer
+from .src.libs.pyraklib.server import PyRakLibServer
 from .src.libs.pyraklib.server import ServerHandler
 import time
 import sys
