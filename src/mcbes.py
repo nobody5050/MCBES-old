@@ -20,5 +20,5 @@ try:
 except Exception as e:
     server.logger.critical("Failed to start! error:"+str(e))
     handler.shutdown()
-        time.sleep(2)
-        sys.exit(1)
+    time.sleep(2)
+    sys.exit(1)
