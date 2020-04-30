@@ -1,31 +1,13 @@
-import socket
-import os
-from shutil import copyfile
+from pyraklib.server import PyRakLibServer
+from pyraklib.server import ServerHandler
+import time
+import sys
 
-if not os.path.isfile('config.py'):
-    os.chdir('src/installer')
-    os.system('python installer.py')
-print ("MCBES proxy is starting! Please wait! Version 1 beta!")
- 
-HOST = '0.0.0.0'
-PORT = 19132
- 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print ('Opening host on 0.0.0.0!')
- 
+print("Starting server!")
 try:
-    s.bind((HOST, PORT))
-except socket.error as msg:
-    print ('Server failed to start! Maybe another server is using the port?')
-    sys.exit()
-     
-print ('Server started!')
-
- 
-s.listen(10)
-
-while 1:
-    conn, addr = s.accept()
-    print(('Connected with ' + addr[0] + ':' + str(addr[1])))
-     
-s.close()
+    server = PyRakLibServer(19132)
+    handler = ServerHandler(server, None)
+except Exeption as e:
+    print("Failed to start server!")
+    print(" ")
+    print(e)
