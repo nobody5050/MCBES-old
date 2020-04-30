@@ -16,8 +16,8 @@ PyRakLib networking library.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from pyraklib.server import PyRakLibServer
-from pyraklib.server import ServerHandler
+from Pyraklib.server import PyRakLibServer
+from Pyraklib.server import ServerHandler
 import time
 import sys
 
