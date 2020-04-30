@@ -3,11 +3,11 @@
 import os
 from shutil import copyfile
 
-print " "
-print "Welcome to MCBES Proxy Server ! You're about to setup the server!"
-print " "
-servername = raw_input("Please put in your mcpe server name: ")
-print'You picked', servername
-print "	"
+print(" ")
+print("Welcome to MCBES Proxy Server ! You're about to setup the server!")
+print(" ")
+servername = input("Please put in your mcpe server name: ")
+print('You picked', servername)
+print("	")
 #TODO save config files
-print 'Setup complete!'
+print('Setup complete!')
