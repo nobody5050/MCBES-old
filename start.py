@@ -3,7 +3,7 @@ import os
 from shutil import copyfile
 
 if not os.path.isfile('config.py'):
-    os.chdir('Core/AlphaMc/wizard')
+    os.chdir('src/installer')
     os.system('python installer.py')
 print "MCBES proxy is starting! Please wait! Version 1 beta!"
  
