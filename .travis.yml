@@ -5,4 +5,5 @@ install:
   - "pip install requests"
 jobs:
   include:
-    - script: python src/libs/raklibtest.py # uses the default stage name "test"
+    - script: python src/libs/raklibtest.py
+    - script: python src/mcbes.py
