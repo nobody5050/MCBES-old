@@ -6,4 +6,3 @@ install:
 jobs:
   include:
     - script: python src/libs/raklibtest.py # uses the default stage name "test"
-    - script: python start.py

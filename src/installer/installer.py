@@ -11,3 +11,4 @@ print('You picked', servername)
 print("	")
 #TODO save config files
 print('Setup complete!')
+#THIS F8LE IS A REMNANT OF WHERE I FORKED THIS FROM. EVENTUALLY IT WILL BE MERGED TO ANOTHER FILE.
