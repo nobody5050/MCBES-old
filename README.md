@@ -4,7 +4,7 @@
 Project forked. Changed the name so i should be fine. 
 **Disclaimer: I will not make a minecraft server software, there are too many already. This is a proxy.**
 
-### MCBES is a powerful fast minecraft proxy server. built for minecraft pocket 0.6.1 and minecraft Pi edition 1.1.0
+### MCBES is a powerful fast minecraft proxy server. built for minecraft pocket 0.6.1 and minecraft Pi edition 0.1.1
 
 ## Why python?
 Python is fast, easy to write, easy for fix bugs. Note, Runs Python 3.4. no requirements.txt as of yet
