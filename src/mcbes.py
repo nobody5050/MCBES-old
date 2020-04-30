@@ -3,11 +3,11 @@ from libs.pyraklib.server import ServerHandler
 import time
 import sys
 
-print("Starting proxy!")
+server.logger.info("Starting Proxy")
 try:
     server = PyRakLibServer(19132)
     handler = ServerHandler(server, None)
     handler.sendOption("name", "MCCPP;MINECON;TestServer")
-    print("server started!")
+    server.logger.info("server started!")
 except Exception as e:
     server.logger.critical("Failed to start! error:"+str(e))
