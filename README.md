@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/nobody5050/MCBES.svg?branch=dev)](https://travis-ci.com/nobody5050/MCBES)
 # MCBES
 #### written by daniktheboss, Forked by nobody5050/6502
 
