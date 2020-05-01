@@ -7,3 +7,4 @@ jobs:
   include:
     - script: python src/raklibtest.py
     - script: python src/mcbes.py
+    - script: python src/raklibpackettest.py
