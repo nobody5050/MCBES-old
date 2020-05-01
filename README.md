@@ -5,15 +5,15 @@
 Project forked. Changed the name so i should be fine. 
 **Disclaimer: I will not make a minecraft server software, there are too many already. This is a proxy.**
 
-### MCBES is a powerful fast minecraft proxy server. built for minecraft pocket 0.6.1 and minecraft Pi edition 0.1.1
+#### MCBES is a powerful fast minecraft proxy server. built for minecraft pocket 0.6.1 and minecraft Pi edition 0.1.1
 
-## Why python?
+### Why python?
 Python is fast, easy to write, easy for fix bugs. Note, Runs Python 3.4. no requirements.txt as of yet
 
-## Release date?
+### Release date?
 NA yet. I may never release, we shall see
 
-## Why 0.6.1?
+### Why 0.6.1?
 I anticipate being asked this a lot if I make it work so I might as well answer now. Basically this is a proxy that translates
 packets send by minecraft pi edition over to ppackets by new bedrock edition servers, the goal being the ability to join
 minecraft bedrock servers on on your pi. **This may constitute piracy as I am enabling you to play minecraft bedrock worlds
