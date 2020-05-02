@@ -23,25 +23,25 @@ from pyraklib.PyRakLib import PyRakLib
 from pyraklib.protocol.Packet import Packet
 
 
-class UNCONNECTED_PONG(Packet):
-    PID = 0x1C
+class OPEN_CONNECTION_REPLY_2(Packet):
+    PID = 0x08
 
-    #Fields
-    pingID = None
     serverID = None
-    serverName = None
+    clientAddress = ()
+    mtuSize = None
 
     def _encode(self):
-        super().clean()
         self.putByte(self.PID)
-        self.putLong(self.pingID)
-        self.putLong(self.serverID)
         self.put(PyRakLib.MAGIC)
-        self.putString(self.serverName)
+        self.putLong(self.serverID)
+        self.putAddress(self.clientAddress[0], self.clientAddress[1], self.clientAddress[2])
+        self.putShort(self.mtuSize)
+        self.putByte(0) # Server security
 
     def _decode(self):
         self.get()
-        self.pingID = self.getLong()
+        self.get(16) # MAGIC
         self.serverID = self.getLong()
-        self.get(16) #MAGIC
-        self.serverName = self.getString()
+        self.clientAddress = self.getAddress()
+        self.mtuSize = self.getShort()
+        # Server security

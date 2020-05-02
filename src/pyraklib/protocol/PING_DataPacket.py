@@ -19,29 +19,18 @@ PyRakLib networking library.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from pyraklib.PyRakLib import PyRakLib
 from pyraklib.protocol.Packet import Packet
 
 
-class UNCONNECTED_PONG(Packet):
-    PID = 0x1C
+class PING_DataPacket(Packet):
+    PID = 0x00
 
-    #Fields
     pingID = None
-    serverID = None
-    serverName = None
 
     def _encode(self):
-        super().clean()
         self.putByte(self.PID)
         self.putLong(self.pingID)
-        self.putLong(self.serverID)
-        self.put(PyRakLib.MAGIC)
-        self.putString(self.serverName)
 
     def _decode(self):
         self.get()
         self.pingID = self.getLong()
-        self.serverID = self.getLong()
-        self.get(16) #MAGIC
-        self.serverName = self.getString()

@@ -19,73 +19,69 @@ PyRakLib networking library.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from abc import ABCMeta
-from struct import pack, unpack
+from pyraklib.protocol.DataPacket import DataPacket
 
-class Binary:
-    __metaclass__ = ABCMeta
 
-    BIG_ENDIAN = 0x00
-    LITTLE_ENDIAN = 0x01
-
+class DATA_PACKET_0(DataPacket):
     @staticmethod
-    def readLTriad(data):
-        return unpack('<i', data + b'\x00')[0]
+    def getPID(): return 0x80
 
+class DATA_PACKET_1(DataPacket):
     @staticmethod
-    def writeLTriad(triad):
-        return pack('<i', triad)[:3]
+    def getPID(): return 0x81
 
+class DATA_PACKET_2(DataPacket):
     @staticmethod
-    def readByte(raw, signed = True):
-        if signed:
-            return unpack('>b', raw)[0]
-        else:
-            return unpack('>B', raw)[0]
+    def getPID(): return 0x82
 
+class DATA_PACKET_3(DataPacket):
     @staticmethod
-    def writeByte(byte, signed = True):
-        if signed:
-            return pack(">b", byte)
-        else:
-            return pack(">B", byte)
+    def getPID(): return 0x83
 
+class DATA_PACKET_4(DataPacket):
     @staticmethod
-    def readShort(raw):
-        return unpack(">H", raw)[0]
+    def getPID(): return 0x84
 
+class DATA_PACKET_5(DataPacket):
     @staticmethod
-    def writeShort(short):
-        return pack(">H", short)
+    def getPID(): return 0x85
 
+class DATA_PACKET_6(DataPacket):
     @staticmethod
-    def readInt(raw):
-        return unpack(">i", raw)[0]
+    def getPID(): return 0x86
 
+class DATA_PACKET_7(DataPacket):
     @staticmethod
-    def writeInt(i):
-        return pack(">i", i)
+    def getPID(): return 0x87
 
+class DATA_PACKET_8(DataPacket):
     @staticmethod
-    def readFloat(raw):
-        return unpack(">f", raw)[0]
+    def getPID(): return 0x88
 
+class DATA_PACKET_9(DataPacket):
     @staticmethod
-    def writeFloat(f):
-        return pack(">f", f)
+    def getPID(): return 0x89
 
+class DATA_PACKET_A(DataPacket):
     @staticmethod
-    def readDouble(raw):
-        return unpack(">d", raw)[0]
+    def getPID(): return 0x8A
 
+class DATA_PACKET_B(DataPacket):
     @staticmethod
-    def writeDouble(d):
-        return pack(">d", d)
+    def getPID(): return 0x8B
 
+class DATA_PACKET_C(DataPacket):
     @staticmethod
-    def readLong(raw):
-        return unpack(">q", raw)[0]
+    def getPID(): return 0x8C
 
+class DATA_PACKET_D(DataPacket):
     @staticmethod
-    def writeLong(l):
-        return pack(">q", l)
+    def getPID(): return 0x8D
+
+class DATA_PACKET_E(DataPacket):
+    @staticmethod
+    def getPID(): return 0x8E
+
+class DATA_PACKET_F(DataPacket):
+    @staticmethod
+    def getPID(): return 0x8F

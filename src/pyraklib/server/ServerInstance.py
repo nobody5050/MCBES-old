@@ -19,29 +19,25 @@ PyRakLib networking library.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from pyraklib.PyRakLib import PyRakLib
-from pyraklib.protocol.Packet import Packet
+from abc import ABCMeta, abstractmethod
 
+class ServerInstance:
+    __metaclass__ = ABCMeta
 
-class UNCONNECTED_PONG(Packet):
-    PID = 0x1C
+    @abstractmethod
+    def openSession(self, identifier, address, port, clientID): pass
 
-    #Fields
-    pingID = None
-    serverID = None
-    serverName = None
+    @abstractmethod
+    def closeSession(self, identifier, reason): pass
 
-    def _encode(self):
-        super().clean()
-        self.putByte(self.PID)
-        self.putLong(self.pingID)
-        self.putLong(self.serverID)
-        self.put(PyRakLib.MAGIC)
-        self.putString(self.serverName)
+    @abstractmethod
+    def handleEncapsulated(self, identifier, packet, flags): pass
 
-    def _decode(self):
-        self.get()
-        self.pingID = self.getLong()
-        self.serverID = self.getLong()
-        self.get(16) #MAGIC
-        self.serverName = self.getString()
+    @abstractmethod
+    def handleRaw(self, address, port, payload): pass
+
+    @abstractmethod
+    def notifyACK(self, identifier, identifierACK): pass
+
+    @abstractmethod
+    def handleOption(self, option, value): pass

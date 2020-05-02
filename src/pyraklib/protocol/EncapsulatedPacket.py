@@ -1,120 +1,118 @@
 """
-   PyRakLib networking library.
+PyRakLib networking library.
    This software is not affiliated with RakNet or Jenkins Software LLC.
    This software is a port of PocketMine/RakLib <https://github.com/PocketMine/RakLib>.
    All credit goes to the PocketMine Project (http://pocketmine.net)
  
-   PyRakLib is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-  
-   PyRakLib is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
- 
-  You should have received a copy of the GNU Lesser General Public License
-  along with PyRakLib.  If not, see <http://www.gnu.org/licenses/>.
+   Copyright (C) 2015  PyRakLib Project
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-import math
-from pyraklib import Binary
-from pyraklib.PyRakLib import substr
+from pyraklib.Binary import Binary
 
 
 class EncapsulatedPacket:
     reliability = None
-    has_split = False
+    hasSplit = False
     length = 0
-    message_index = None
-    order_index = None
-    order_channel = None
-    split_count = None
-    split_id = None
-    split_index = None
-    buffer = None
-    need_ack = False
-    identifier_ack = None
+    messageIndex = None
+    orderIndex = None
+    orderChannel = None
+    splitCount = None
+    splitID = None
+    splitIndex = None
+    buffer = bytearray()
+    needACK = False
+    identifierACK = None
 
     @staticmethod
-    def from_binary(binary: bytearray, internal: bool = False, offset: int = None) -> tuple:
+    def fromBinary(binary, internal = False, offset = None):
+        if isinstance(binary, str):
+            binary = bytes(binary, "UTF-8")
         packet = EncapsulatedPacket()
-
         flags = binary[0]
-        packet.reliability = reliability = (flags & 0b11100000) >> 5
-        packet.has_split = has_split = (flags & 0b00010000) > 0
+        packet.reliability = (flags & 0b11100000) >> 5
+        packet.hasSplit = (flags & 0b00010000) > 0
         if internal:
-            length = Binary.read_int(substr(binary, 1, 4))
-            packet.identifier_ack = Binary.read_int(substr(binary, 5, 4))
+            length = Binary.readInt(binary[1:5])
+            packet.identifierACK = Binary.readInt(binary[5:9])
             offset = 9
         else:
-            length = int(math.ceil(Binary.read_short(substr(binary, 1, 2)) / 8))
+            length = int(Binary.readShort(binary[1:3]) / 8)
             offset = 3
-            packet.identifier_ack = None
+            packet.identifierACK = None
 
-        if reliability > 0:
-            if reliability >= 2 and reliability != 5:
-                packet.message_index = Binary.read_l_triad(substr(binary, offset, 3))
+        if packet.reliability > 0:
+            if (packet.reliability > 2 or packet.reliability == 2) and packet.reliability is not 5:
+                packet.messageIndex = Binary.readLTriad(binary[offset:offset+3])
                 offset += 3
-            if reliability <= 4 and reliability != 2:
-                packet.order_index = Binary.read_l_triad(substr(binary, offset, 3))
+
+            if (packet.reliability < 4 or packet.reliability == 4) and packet.reliability is not 2:
+                packet.orderIndex = Binary.readLTriad(binary[offset:offset+3])
                 offset += 3
-                packet.order_channel = binary[offset]
+                packet.orderChannel = Binary.readByte(binary[offset:offset+1])
                 offset += 1
 
-        if has_split:
-            packet.split_count = Binary.read_int(substr(binary, offset, 4))
+        if packet.hasSplit:
+            packet.splitCount = Binary.readInt(binary[offset:offset+4])
             offset += 4
-            packet.split_id = Binary.read_short(substr(binary, offset, 2))
+            packet.splitID = Binary.readShort(binary[offset:offset+2])
             offset += 2
-            packet.split_index = Binary.read_int(substr(binary, offset, 4))
+            packet.splitIndex = binary.readInt(binary[offset:offset+4])
             offset += 4
 
-        packet.buffer = substr(binary, offset, length)
+        packet.buffer = binary[offset:offset+length]
         offset += length
 
-        return offset, packet
+        return packet, offset
 
-    def __len__(self) -> int:
-        l = 3 + len(self.buffer)
-        if self.message_index is not None:
-            l += 3
-        if self.order_channel is not None:
-            l += 4
-        if self.has_split:
-            l += 10
-        return l
+    def getTotalLength(self):
+        length = 3 + len(self.buffer)
+        if self.messageIndex is not None:
+            length += 3
+        if self.orderIndex is not None:
+            length += 4
+        if self.hasSplit:
+            length += 10
 
-    def get_total_length(self) -> int:
-        return len(self)
+        return length
 
-    def to_binary(self, internal: bool = False) -> bytearray:
-        binary = bytearray()
-        if self.has_split:
-            binary.append((self.reliability << 5) | (self.has_split & 0b00010000))
-        else:
-            binary.append((self.reliability << 5) | (0))
+    def toBinary(self, internal = False):
+        payload = bytearray()
+        if self.hasSplit:
+            payload += (Binary.writeByte((self.reliability << 5) | 0b00010000))
+        else :
+            payload += (Binary.writeByte(self.reliability << 5))
 
         if internal:
-            binary.append(Binary.write_int(len(self.buffer)))
-            binary.append(Binary.write_int(self.identifier_ack))
+            payload += (Binary.writeInt(len(self.buffer)))
+            payload += (Binary.writeInt(self.identifierACK))
         else:
-            binary.append(Binary.write_short(len(self.buffer) << 3))
+            payload += (Binary.writeShort(len(self.buffer) << 3))
 
         if self.reliability > 0:
-            if self.reliability >= 2 and self.reliability != 5:
-                binary.append(Binary.write_l_triad(self.message_index))
-            if self.reliability <= 4 and self.reliability != 2:
-                binary.append(Binary.write_l_triad(self.order_index))
-                binary.append(Binary.write_byte(self.order_channel))
+            if (self.reliability > 2 or self.reliability == 2) and self.reliability is not 5:
+                payload += (Binary.writeLTriad(self.messageIndex))
+            if (self.reliability < 4 or self.reliability == 4) and self.reliability is not 2:
+                payload += (Binary.writeLTriad(self.orderIndex))
+                payload += (Binary.writeByte(self.orderChannel))
 
-        if self.has_split:
-            binary.append(Binary.write_int(self.split_count))
-            binary.append(Binary.write_short(self.split_id))
-            binary.append(Binary.write_int(self.split_index))
+        if self.hasSplit:
+            payload += (Binary.writeInt(self.splitCount))
+            payload += (Binary.writeShort(self.splitID))
+            payload += (Binary.writeInt(self.splitIndex))
 
-        binary.append(self.buffer)
-        return binary
+        payload += (self.buffer)
 
-    def __str__(self):
-        return self.to_binary()
+        return payload

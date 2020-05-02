@@ -19,29 +19,43 @@ PyRakLib networking library.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from pyraklib.PyRakLib import PyRakLib
 from pyraklib.protocol.Packet import Packet
 
 
-class UNCONNECTED_PONG(Packet):
-    PID = 0x1C
+class SERVER_HANDSHAKE_DataPacket(Packet):
+    PID = 0x10
 
-    #Fields
-    pingID = None
-    serverID = None
-    serverName = None
+    address = None
+    port = None
+
+    systemAddresses = [
+        ["127.0.0.1", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4],
+        ["0.0.0.0", 0, 4]
+    ]
+
+    sendPing = None
+    sendPong = None
 
     def _encode(self):
-        super().clean()
         self.putByte(self.PID)
-        self.putLong(self.pingID)
-        self.putLong(self.serverID)
-        self.put(PyRakLib.MAGIC)
-        self.putString(self.serverName)
+        self.putAddress(self.address, self.port)  # TODO: Correct address version
+        for i in range(0, 10):
+            self.putAddress(self.systemAddresses[i][0], self.systemAddresses[i][1], self.systemAddresses[i][2])
+        self.putLong(self.sendPing)
+        self.putLong(self.sendPong)
 
     def _decode(self):
         self.get()
-        self.pingID = self.getLong()
-        self.serverID = self.getLong()
-        self.get(16) #MAGIC
-        self.serverName = self.getString()
+        self.address, self.port = self.getAddress()
+        for i in range(0, 10):
+            self.systemAddresses[i][0], self.systemAddresses[i][1], self.systemAddresses[i][2] = self.getAddress()
+        self.sendPing = self.getLong()
+        self.sendPong = self.getLong()
