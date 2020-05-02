@@ -16,6 +16,6 @@ server = {
   "plugins": true,
   #unsupported block prefrance
   "wool_for_unsupported_block": true,
-  "update_block_for_unsupported_block": = false,
+  "update_block_for_unsupported_block": false,
  
 }
