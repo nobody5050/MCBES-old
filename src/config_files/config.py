@@ -2,6 +2,9 @@
 #AlphaMc Config File, updated for use with mcbes
 #Version Of Config: 2
 
+#                   IMPORTS
+import json
+
 #                   SERVER
 #login message
 server = {
