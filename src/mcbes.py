@@ -24,15 +24,15 @@ if "TRAVIS" in os.environ:
         handler.shutdown()
         time.sleep(2)
         sys.exit(1)
-        else:
-            try:
-                server = PyRakLibServer(19132)
-                server.logger.info("Starting Proxy")
-                handler = ServerHandler(server, None)
-                handler.sendOption("name", "MCCPP;MINECON;TestServer")
-                server.logger.info("server started!")
-            except Exception as e:
-                server.logger.critical("Failed to start! error:"+str(e))
-                handler.shutdown()
-                time.sleep(2)
-                sys.exit(1)
+else:
+    try:
+        server = PyRakLibServer(19132)
+        server.logger.info("Starting Proxy")
+        handler = ServerHandler(server, None)
+        handler.sendOption("name", "MCCPP;MINECON;TestServer")
+        server.logger.info("server started!")
+    except Exception as e:
+        server.logger.critical("Failed to start! error:"+str(e))
+        handler.shutdown()
+        time.sleep(2)
+        sys.exit(1)
