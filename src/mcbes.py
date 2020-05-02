@@ -6,9 +6,11 @@
 
 from pyraklib.server import PyRakLibServer
 from pyraklib.server import ServerHandler
+import config_files.config as cfg
 import time
 import sys
 import os
+import json
 
 if "TRAVIS" in os.environ:
     try:
@@ -26,6 +28,7 @@ if "TRAVIS" in os.environ:
         sys.exit(1)
 else:
     try:
+        name = json.loads(cfg.server.name)
         server = PyRakLibServer(19132)
         server.logger.info("Starting Proxy")
         handler = ServerHandler(server, None)
