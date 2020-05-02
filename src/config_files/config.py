@@ -8,14 +8,14 @@ import json
 #                   SERVER
 #login message
 server = {
-  "name": "My Mcpi Proxy!",
-  "loginmessage": "@player joined the game",
+  "name":"My Mcpi Proxy!",
+  "loginmessage":"@player joined the game",
   #logout message
-  "logoutmessage": "@player left the game",
+  "logoutmessage":"@player left the game",
   #plugins (future stuff - might let the player do mods)
-  "plugins": true,
+  "plugins":true,
   #unsupported block prefrance
-  "wool_for_unsupported_block": true,
-  "update_block_for_unsupported_block": false,
+  "wool_for_unsupported_block":true,
+  "update_block_for_unsupported_block":false,
  
 }
