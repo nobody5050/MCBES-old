@@ -28,7 +28,7 @@ if "TRAVIS" in os.environ:
         time.sleep(2)
         sys.exit(1)
 else:
-    try:
+    try: 
         name = json.loads(cfg.server.name)
         server = PyRakLibServer(19132)
         log.info("Starting MCBES proxy! version 1.0")
