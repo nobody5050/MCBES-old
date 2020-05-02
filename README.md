@@ -1,4 +1,4 @@
-[!Build Status](https://travis-ci.com/nobody5050/MCBES.svg?branch=development) ![Issues](https://img.shields.io/github/issues/nobody5050/mcbes)
+[![Build Status](https://travis-ci.com/nobody5050/MCBES.svg?branch=development)] ![Issues](https://img.shields.io/github/issues/nobody5050/mcbes)
 # MCBES
 #### written by daniktheboss, Forked by nobody5050/6502
 
