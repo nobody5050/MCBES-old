@@ -11,6 +11,7 @@ import time
 import sys
 import os
 import json
+import logging as log
 
 if "TRAVIS" in os.environ:
     try:
@@ -30,12 +31,12 @@ else:
     try:
         name = json.loads(cfg.server.name)
         server = PyRakLibServer(19132)
-        server.logger.info("Starting Proxy")
+        log.info("Starting MCBES proxy! version 1.0")
         handler = ServerHandler(server, None)
         handler.sendOption("name", "MCCPP;MINECON;TestServer")
-        server.logger.info("server started!")
+        log.info("server started!")
     except Exception as e:
-        server.logger.critical("Failed to start! error:"+str(e))
+        log.critical("Failed to start! error:"+str(e))
         handler.shutdown()
         time.sleep(2)
         sys.exit(1)
