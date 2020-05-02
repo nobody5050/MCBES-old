@@ -10,21 +10,29 @@ import time
 import sys
 import os
 
-try:
-    server = PyRakLibServer(19132)
-    server.logger.info("Starting Proxy")
-    handler = ServerHandler(server, None)
-    handler.sendOption("name", "MCCPP;MINECON;TestServer")
-    server.logger.info("server started!")
-    server.logger.debug("Checking if this is a test build...")
-    if "TRAVIS" in os.environ:
+if "TRAVIS" in os.environ:
+    try:
+        server = PyRakLibServer(19132)
+        handler = ServerHandler(server, None)
+        handler.sendOption("name", "MCCPP;MINECON;TestServer")
+        time.sleep(10)
         handler.shutdown()
         time.sleep(2)
         sys.exit(0)
-    else:
-      server.logger.debug("Not a test build! Enjoy your proxy!")
-except Exception as e:
-    server.logger.critical("Failed to start! error:"+str(e))
-    handler.shutdown()
-    time.sleep(2)
-    sys.exit(1)
+    except Exception as e:
+        server.logger.critical("Failed to start! error:"+str(e))
+        handler.shutdown()
+        time.sleep(2)
+        sys.exit(1)
+        else:
+            try:
+                server = PyRakLibServer(19132)
+                server.logger.info("Starting Proxy")
+                handler = ServerHandler(server, None)
+                handler.sendOption("name", "MCCPP;MINECON;TestServer")
+                server.logger.info("server started!")
+            except Exception as e:
+                server.logger.critical("Failed to start! error:"+str(e))
+                handler.shutdown()
+                time.sleep(2)
+                sys.exit(1)
