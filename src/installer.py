@@ -8,14 +8,22 @@
 #runs on first boot
 
 import os
-from shutil import copyfile
 
 print(" ")
 print("Welcome to MCBES Proxy Server ! You're about to setup the server!")
 print(" ")
-servername = input("Please put in your mcpe server name: ")
-print('You picked', servername)
-print("	")
-#TODO save config files
+if not os.path.exists('/config_files/config.py'):
+    os.mknod('/config_files/config.py')
+    install = true
+
+while install = true:
+  servername = input("Please put in your mcpe server name: ")
+  print('You picked', servername)
+  print("	")
+  
+f = open("/config_files/config.py", "a")
+f.write(servername, "= true")
+f.close()
+
 print('Setup complete!')
 #THIS FILE IS A REMNANT OF WHERE I FORKED THIS FROM. EVENTUALLY IT WILL BE MERGED TO ANOTHER FILE.
