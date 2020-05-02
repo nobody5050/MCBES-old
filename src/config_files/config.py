@@ -13,9 +13,9 @@ server = {
   #logout message
   "logoutmessage":"@player left the game",
   #plugins (future stuff - might let the player do mods)
-  "plugins":true,
+  "plugins":True,
   #unsupported block prefrance
-  "wool_for_unsupported_block":true,
-  "update_block_for_unsupported_block":false,
+  "wool_for_unsupported_block":True,
+  "update_block_for_unsupported_block":False,
  
 }
