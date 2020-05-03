@@ -1,6 +1,6 @@
 # coding=utf-8
-from colors import COLORS
-from compatible import uchr
+from logtrail.colors import COLORS
+from logtrail.compatible import uchr
 
 TRAIL = uchr(57520)
 
