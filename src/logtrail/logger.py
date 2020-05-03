@@ -1,4 +1,4 @@
-from symbols import INFO, DEBUG, WARN, ERROR
+from logtrail.symbols import INFO, DEBUG, WARN, ERROR
 
 
 class Logger(object):
