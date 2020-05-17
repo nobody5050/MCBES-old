@@ -312,7 +312,7 @@ class Session:
                 self.reliableWindow[packet.messageIndex] = packet
 
     def handleEncapsulatedPacketRoute(self, packet):
-        if self.sessionManager == None:
+        if self.sessionManager is None:
             return
 
         if packet.hasSplit:
