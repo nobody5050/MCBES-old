@@ -33,8 +33,7 @@ import copy
 def microtime(get_as_float = False):
     if get_as_float:
         return time_.time()
-    else:
-        return '%f %d' % math.modf(time_.time())
+    return '%f %d' % math.modf(time_.time())
 
 def str_split(s, n) -> str:
     ret = []
