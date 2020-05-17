@@ -202,7 +202,7 @@ class Session:
 
     def addToQueue(self, pk, flags = PyRakLib.PRIORITY_NORMAL):
         priority = flags & 0b0000111
-        if pk.needACK and pk.messageIndex != None:
+        if pk.needACK and pk.messageIndex is not None:
             self.needACK[pk.identifierACK][pk.messageIndex] = pk.messageIndex
         if priority == PyRakLib.PRIORITY_IMMEDIATE: # Skip queues
             packet = DATA_PACKET_0()
