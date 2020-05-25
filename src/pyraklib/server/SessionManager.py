@@ -133,8 +133,8 @@ class SessionManager:
         data = self.socket.readPacket()
         if data is None:
             return
-        else:
-            buffer, source = data
+        buffer, source = data
+      
         if len(buffer) > 0:
             self.receiveBytes += len(buffer)
             try:
