@@ -129,7 +129,7 @@ class SessionManager:
 
     def receivePacket(self):
         data = self.socket.readPacket()
-        if data == None:
+        if data is None:
             return
         else:
             buffer, source = data
