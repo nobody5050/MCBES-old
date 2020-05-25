@@ -29,7 +29,8 @@ class ServerInstance:
          pass
 
     @abstractmethod
-    def closeSession(self, identifier, reason): pass
+    def closeSession(self, identifier, reason):
+         pass
 
     @abstractmethod
     def handleEncapsulated(self, identifier, packet, flags):
