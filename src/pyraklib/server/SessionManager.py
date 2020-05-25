@@ -86,7 +86,8 @@ class SessionManager:
             max = 5000
 
             while --max and self.receivePacket(): pass
-            while self.receiveStream(): pass
+            while self.receiveStream():
+               pass
 
             time_ = microtime(True) - start
             if time_ < 0.05:
