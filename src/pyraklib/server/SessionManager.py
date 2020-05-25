@@ -295,7 +295,7 @@ class SessionManager:
         id = ip + ":" + str(port)
         try:
             return self.sessions[id]
-        except KeyError or NameError:
+        except (KeyError, NameError):
             self.sessions[id] = Session(self, ip, port)
             return self.sessions[id]
 
