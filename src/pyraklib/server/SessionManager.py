@@ -305,7 +305,7 @@ class SessionManager:
             self.sessions[id].close()
             del self.sessions[id]
             self.streamClose(id, reason)
-        except NameError or KeyError:
+        except (NameError, KeyError):
             pass
 
     def openSession(self, session):
