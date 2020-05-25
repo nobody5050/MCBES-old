@@ -418,7 +418,7 @@ class Session:
                 for seq in packet.seqNums:
                     try:
                         for pk in self.recoveryQueue[seq]:
-                            if isinstance(pk, EncapsulatedPacket) and pk.needACK and pk.messageIndex != None:
+                            if isinstance(pk, EncapsulatedPacket) and pk.needACK and pk.messageIndex is not None:
                                 del self.needACK[pk.identifierACK][pk.messageIndex]
                     except NameError:
                         pass
