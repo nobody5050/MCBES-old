@@ -115,8 +115,6 @@ class SessionManager:
             self.receiveBytes = 0
 
             if len(self.block) > 0:
-                # TODO: Remove this?
-                #self.block = sorted(self.block.items(), key=lambda x: x[1])
                 now = microtime(True)
                 for address in self.block.keys():
                     timeout = self.block.get(address)
