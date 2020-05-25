@@ -195,7 +195,7 @@ class SessionManager:
 
     def receiveStream(self):
         packet = self.server.readMainToThreadPacket()
-        if packet == None:
+        if packet is None:
             return False
         if len(packet) > 0:
             id = ord(packet[0])
